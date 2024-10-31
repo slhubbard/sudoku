@@ -16,14 +16,13 @@ const validDeleteKeys = new Set(["Backspace", "Delete", "x", "0"]);
 const validArrowKeys = new Set(["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"]);
 
 export default function Puzzle() {
-  const [originalPuzzle, setOriginalPuzzle] = useState([...dummyPuzzle]);
-  const [currentPuzzle, setCurrentPuzzle] = useState([...originalPuzzle]);
+  const [originalPuzzle, setOriginalPuzzle] = useState(() => {return JSON.parse(localStorage.getItem("originalPuzzle")) || [...dummyPuzzle]});
+  const [currentPuzzle, setCurrentPuzzle] = useState(() => {return JSON.parse(localStorage.getItem("currentPuzzle")) || [...originalPuzzle]});
   const [lastHighlightedCell, setLastHighlightedCell] = useState(null);
 
   useEffect(() => {
     const handleKeyDown = (event) => {
-      console.log(event.key);
-      if (lastHighlightedCell !== null) {
+        if (lastHighlightedCell !== null) {
         if (validDeleteKeys.has(event.key) && originalPuzzle[lastHighlightedCell] === 0) {
           setCurrentPuzzle((currentPuzzle) => {
             let newCurrentPuzzle = currentPuzzle.slice();
@@ -56,6 +55,11 @@ export default function Puzzle() {
       window.removeEventListener("keydown", handleKeyDown);
     };
   });
+
+  useEffect(() =>{
+    localStorage.setItem("originalPuzzle", JSON.stringify([...originalPuzzle]));
+    localStorage.setItem("currentPuzzle", JSON.stringify([...currentPuzzle]));
+  }, [originalPuzzle, currentPuzzle]);
 
   function clearWork() {
     setCurrentPuzzle([...originalPuzzle]);

@@ -11,7 +11,6 @@ createRoot(document.getElementById("root")).render(
       Hello and thank you for coming to check out my site! Please note it is
       under construction -- currently there is only one preset puzzle to play.
       But don&apos;t worry, more stuff is coming Soon&trade;.
-      <br /> Also, just a heads up -- Progress currently is not saved. So be careful of refreshing!
     </AlertBanner>
     <center>
       <h1> Sudoku </h1>

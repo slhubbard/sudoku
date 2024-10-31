@@ -18,6 +18,7 @@
 - Fix prop validation linter error in Menu.jsx (lol)
 - Pass one object that contains all necessary handlers to Menu.jsx? Or integrate Menu.jsx fully with Puzzle.jsx?
 - Add option to cycle through different highlighting colors
-- Progress is saved in browser
+- ~~Progress is saved in browser~~
+- Add smaller numbers for potential values
 - Get different puzzles through someone else's API
 - (Eventually, hopefully) generate puzzles on-demand with client-side JavaScript code.
