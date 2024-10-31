@@ -1,0 +1,17 @@
+.AlertBanner {
+  background-color: hsl(0, 66%, 60%);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  text-align: center;
+  cursor: pointer;
+}
+
+.AlertBanner:hover {
+  background-color: hsl(0, 66%, 65%);
+}
+
+.DismissMessage {
+  font-style: italic;
+  font-size: 0.7rem;
+}

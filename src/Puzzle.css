@@ -1,0 +1,41 @@
+table {
+  border: 3px solid black;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+th, td {
+  border: 1px solid;
+  width:1.5em;
+  height:1.5em;
+  text-align: center;
+  vertical-align: middle;
+  user-select: none;
+  font-size: 2rem;
+}
+
+td.highlighted {
+  outline: 3px solid skyblue;
+}
+
+td.original {
+  font-weight: bold;
+}
+
+td.selected {
+  background-color: silver;
+  cursor: pointer;
+}
+
+td:not(.selected):not(.original):hover {
+  background-color: lightgrey;
+  cursor: pointer;
+}
+
+tr:nth-child(3n) {
+  border-bottom:2px solid black;
+}
+
+td:nth-child(3n){
+  border-right:2px solid black;
+}
