@@ -15,10 +15,12 @@
 - Cells that are Selectable (but not Selected) will be shaded a light gray (slightly lighter than silver) when hovered over by the mouse.
 
 ## TODOs
-- Fix prop validation linter error in Menu.jsx (lol)
-- Pass one object that contains all necessary handlers to Menu.jsx? Or integrate Menu.jsx fully with Puzzle.jsx?
-- Add option to cycle through different highlighting colors
+- ~~Fix prop validation linter error in Menu.jsx (lol)~~
+- ~~Pass one object that contains all necessary handlers to Menu.jsx? Or integrate Menu.jsx fully with Puzzle.jsx?~~
+- Customization Options
+  - Add option to cycle through different highlighting colors
+  - Add options to change themes of given vs. added cells
 - ~~Progress is saved in browser~~
-- Add smaller numbers for potential values
-- Get different puzzles through someone else's API
+- ~~Add smaller numbers for potential values~~
+- Button to validate the puzzle when fully filled out.
 - (Eventually, hopefully) generate puzzles on-demand with client-side JavaScript code.

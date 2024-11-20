@@ -6,8 +6,8 @@ table {
 
 th, td {
   border: 1px solid;
-  width:1.5em;
-  height:1.5em;
+  width:3rem;
+  height:3rem;
   text-align: center;
   vertical-align: middle;
   user-select: none;
@@ -38,4 +38,13 @@ tr:nth-child(3n) {
 
 td:nth-child(3n){
   border-right:2px solid black;
+}
+
+.MenuItem {
+  cursor: pointer;
+}
+
+td.candidates {
+  color: darkblue;
+  font-size: 0.8rem;
 }

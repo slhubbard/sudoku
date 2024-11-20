@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import clsx from "clsx";
 import "./Puzzle.css";
-import Menu from "./Menu";
 
 const dummyPuzzle = [
   3, 0, 2, 4, 0, 1, 8, 0, 9, 0, 0, 1, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -14,6 +13,16 @@ const dummyPuzzle = [
 const validNumbers = new Set(["1", "2", "3", "4", "5", "6", "7", "8", "9"]);
 const validDeleteKeys = new Set(["Backspace", "Delete", "x", "0"]);
 const validArrowKeys = new Set(["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"]);
+const validCandidateKeys = new Set(["!", "@", "#", "$", "%", "^", "&", "*", "("]);
+const candidateMap = {"!": 1, "@": 2, "#": 3, "$": 4, "%": 5, "^": 6, "&": 7, "*": 8, "(": 9};
+
+function formatNumber(n) {
+  return (n === 0 ? " " : n);
+}
+
+function candidateToNumber(candidate) {
+  return candidateMap[candidate];
+}
 
 export default function Puzzle() {
   const [originalPuzzle, setOriginalPuzzle] = useState(() => {return JSON.parse(localStorage.getItem("originalPuzzle")) || [...dummyPuzzle]});
@@ -33,6 +42,17 @@ export default function Puzzle() {
           setCurrentPuzzle((currentPuzzle) => {
             let newCurrentPuzzle = currentPuzzle.slice();
             newCurrentPuzzle[lastHighlightedCell] = parseInt(event.key);
+            return newCurrentPuzzle;
+          });
+        } else if (validCandidateKeys.has(event.key) && originalPuzzle[lastHighlightedCell] === 0) {
+          setCurrentPuzzle((currentPuzzle) => {
+            let newCurrentPuzzle = JSON.parse(JSON.stringify(currentPuzzle));
+            if (!Array.isArray(newCurrentPuzzle[lastHighlightedCell])) {
+              newCurrentPuzzle[lastHighlightedCell] = Array.from({length: 9,}).fill(false);
+              newCurrentPuzzle[lastHighlightedCell][candidateToNumber(event.key)] = true;
+            } else {
+              newCurrentPuzzle[lastHighlightedCell][candidateToNumber(event.key)] = !currentPuzzle[lastHighlightedCell][candidateToNumber(event.key)];
+            }
             return newCurrentPuzzle;
           });
         } else if (validArrowKeys.has(event.key)) {
@@ -78,6 +98,7 @@ export default function Puzzle() {
                     highlighted: i * 9 + j === lastHighlightedCell,
                     original: originalPuzzle[i * 9 + j] !== 0,
                     selected: i * 9 + j === lastHighlightedCell && originalPuzzle[i * 9 + j] === 0,
+                    candidates: Array.isArray(currentPuzzle[i*9+j]),
                   })}
                   onClick={() => {
                     const index = i * 9 + j;
@@ -88,15 +109,18 @@ export default function Puzzle() {
                     }
                   }}
                 >
-                  {currentPuzzle[i * 9 + j] || ""}
+                  {Array.isArray(currentPuzzle[i*9+j]) ? currentPuzzle[i*9+j].map((v, i)=> v ? i + " " : " ") : formatNumber(currentPuzzle[i*9+j])}
                 </td>
               ))}
             </tr>
           ))}
         </tbody>
       </table>
-
-      <Menu clearWorkHandler={clearWork}/>
+      <br />
+      {/* Menu below */}
+      <button className="MenuItem" onClick={clearWork}>
+        Clear My Work
+      </button>
     </div>
   );
 }
